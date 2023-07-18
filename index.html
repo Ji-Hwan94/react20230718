@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div id="root"></div>
+  </body>
+  <!-- <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script> -->
+  <script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+  <script type="text/babel">
+    let counter = 0;
+    // 단순 react
+    // const bnt = React.createElement(
+    //   "button",
+    //   { onClick: () => console.log("clicked") },
+    //   "Click Me"
+    // );
+    // ---------------------------------------------------------------------------------------------------------------------
+    // 바벨 사용
+    // function Title() {
+    //   return (
+    //     <button onClick={() => console.log("clicked")}>Hello I am btn</button>
+    //   );
+    // }
+    // ---------------------------------------------------------------------------------------------------------------------
+    // es6 문법
+    // const Container = () => (
+    //   <div>
+    //     <h3>Total Click: {counter}</h3>
+    //     <button onClick={countUp}>Hello I am btn</button>
+    //   </div>
+    // );
+    // ---------------------------------------------------------------------------------------------------------------------
+    // 리랜더링을 의도적으로 하게 해주야함
+    // function countUp() {
+    //   counter = counter + 1;
+    //   console.log(counter);
+    //   render(); //<------------------- 이 부분에 랜더링을 하도록 요청
+    // }
+    // function render() {
+    //   ReactDOM.render(<App />, root);
+    // }
+    // function App() {
+    //   return (
+    //     <div>
+    //       <h3>Total Click: {counter}</h3>
+    //       <button onClick={countUp}>Hello I am btn</button>
+    //     </div>
+    //   );
+    // }
+    // ---------------------------------------------------------------------------------------------------------------------
+    // setCounter counter의 값을 변경해주고 자동으로 리랜더링을 시행한다.
+    // function App() {
+    //   const [counter, setCounter] = React.useState(0);
+    //   console.log(React.useState("hello"));
+    //   const onClick = () => {
+    //     setCounter(counter + 1);
+    //   };
+    //   return (
+    //     <div>
+    //       <h3>Total Click: {counter}</h3>
+    //       <button onClick={onClick}>Hello I am btn</button>
+    //     </div>
+    //   );
+    // }
+    // ---------------------------------------------------------------------------------------------------------------------
+    // 컴포넌트 생성 및 사용 (고립화 및 캡슐화)
+    // function MinToHours() {
+    //   const [amount, setAmount] = React.useState(0);
+    //   const [inverted, setInverted] = React.useState(false);
+
+    //   const onChange = (event) => {
+    //     setAmount(event.target.value);
+    //   };
+
+    //   const reset = () => setAmount(0);
+    //   // 현재의 값을 param으로 받아서 변경
+    //   const onInvert = () => {
+    //     reset();
+    //     setInverted((current) => !current);
+    //   };
+
+    //   return (
+    //     <div>
+    //       <div>
+    //         <label for="분">분</label>
+    //         <input
+    //           value={inverted ? amount * 60 : amount}
+    //           id="minutes"
+    //           placeholder="분"
+    //           type="number"
+    //           onChange={onChange}
+    //           disabled={inverted}
+    //         ></input>
+    //       </div>
+    //       <div>
+    //         <label for="시">시</label>
+    //         <input
+    //           value={inverted ? amount : Math.round(amount / 60)}
+    //           id="hours"
+    //           placeholder="시"
+    //           type="number"
+    //           onChange={onChange}
+    //           disabled={!inverted}
+    //         ></input>
+    //       </div>
+    //       <button onClick={reset}>reset</button>
+    //       <button onClick={onInvert}>
+    //         {inverted ? "trun back" : "inverted"}
+    //       </button>
+    //     </div>
+    //   );
+    // }
+    // function KmToMiles() {
+    //   const [amount, setAmount] = React.useState(0);
+    //   const [inverted, setInverted] = React.useState(false);
+
+    //   const onChange = (event) => {
+    //     setAmount(event.target.value);
+    //   };
+
+    //   const reset = () => setAmount(0);
+    //   // 현재의 값을 param으로 받아서 변경
+    //   const onInvert = () => {
+    //     reset();
+    //     setInverted((current) => !current);
+    //   };
+
+    //   return (
+    //     <div>
+    //       <h3>거리</h3>
+    //       <div>
+    //         <label for="km">km</label>
+    //         <input
+    //           value={inverted ? amount * 1.60934 : amount}
+    //           id="km"
+    //           placeholder="km"
+    //           type="number"
+    //           onChange={onChange}
+    //           disabled={inverted}
+    //         ></input>
+    //       </div>
+    //       <div>
+    //         <label for="마일">mile</label>
+    //         <input
+    //           value={inverted ? amount : amount * 0.621371}
+    //           id="mile"
+    //           placeholder="마일"
+    //           type="number"
+    //           onChange={onChange}
+    //           disabled={!inverted}
+    //         ></input>
+    //       </div>
+    //       <button onClick={reset}>reset</button>
+    //       <button onClick={onInvert}>
+    //         {inverted ? "trun back" : "inverted"}
+    //       </button>
+    //     </div>
+    //   );
+    // }
+    // function App() {
+    //   const [index, setIndex] = React.useState("-1");
+    //   const onSelect = (event) => {
+    //     setIndex(event.target.value);
+    //   };
+    //   return (
+    //     <div>
+    //       <h1>Converter</h1>
+    //       <select onChange={onSelect} value={index}>
+    //         <option value="-1">Select your option</option>
+    //         <option value="0">시간 계산</option>
+    //         <option value="1">거리 계산</option>
+    //       </select>
+    //       <hr />
+    //       {index === "-1" ? " Please select your option" : null}
+    //       {index === "0" ? <MinToHours /> : null}
+    //       {index === "1" ? <KmToMiles /> : null}
+    //     </div>
+    //   );
+    // }
+    // const root = document.getElementById("root");
+    // ReactDOM.render(<App />, root);
+    // ---------------------------------------------------------------------------------------------------------------------
+    // props는 컴포넌트에서 받는 유일한 인자 => 객체(object) 형태로 전달한다.
+    // 객체의 value 값만 넘겨 받고 싶을 때는 파라미터에 { key1, key2 }로 작성한다.
+    function Btn(props) {
+      console.log(props);
+      return (
+        <div>
+          <button
+            onClick={props.changeValue}
+            style={{
+              backgroundColor: "red",
+              color: "white",
+              padding: "10px 20px",
+              border: 0,
+              borderRadius: 10,
+              fontSize: props.big ? 24 : 16,
+            }}
+          >
+            {props.text}
+          </button>
+        </div>
+      );
+    }
+
+    // 부모 컴포넌트(App)가 변경 될때 자식 컴포넌트들 전부가 다시 랜더링이 된다.
+    // 자식 컴포넌트 중 변경된 것들만 랜더링을 하게 하기 위해서 React.memo를 사용한다.
+    // 예시)
+    // const MemorizeBtn = React.memo(Btn);
+    // <MemorizeBtn text={value} big={true} changeValue={changeValue} /> <---- 해당 컴포넌트의 props들이 변경 될 때마다 윗 부분만 랜더링 된다.
+    // <MemorizeBtn text="Continue"/>
+
+    // props의 타입을 확실히 하고 싶을 때 사용, isRequired는 무조건적으로 들어가야할 props.val
+    Btn.propTypes = {
+      text: PropTypes.string.isRequired,
+      big: PropTypes.bool,
+    };
+    function App() {
+      const [value, setValue] = React.useState("save change");
+      const changeValue = () => setValue("revert change");
+      return (
+        <>
+          <Btn text={value} big={true} changeValue={changeValue} />
+          <Btn text={"Continue"} big={false} />
+        </>
+      );
+    }
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+  </script>
+</html>
